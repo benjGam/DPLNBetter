@@ -26,7 +26,7 @@ function resources_selector() {
         const hex = (x) => parseInt(x).toString(16).slice(-2); // Parse x from 10 base to 16 base  
         return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]); // Return formated rgb output
       };
-    for (let x of document.getElementsByTagName('li')) {
+    for (let x of document.getElementsByTagName('table')[1].getElementsByTagName('li')) {
         x.addEventListener('click', function() {
             if(this.style.color != '' && rgb2hex(this.style.color).toUpperCase() === resources_selected_color.toLocaleUpperCase()) {
                 this.style.color = font_color != '' ? font_color : '#626262';
