@@ -1,0 +1,17 @@
+{
+    "name": "DPLNBetter",
+    "description": "This extension is made for demonstration purposes",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+      "default_title" : "Config extension",
+      "default_popup" : "popup.html"
+    },
+    "permissions": [
+       "activeTab",
+       "scripting"
+    ],
+    "background": {
+       "service_worker": "background.js"
+    }
+ }
