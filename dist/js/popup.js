@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(()=>{document.getElementById("dark").addEventListener("click",(e=>{alert("test")}))}));
