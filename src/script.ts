@@ -14,32 +14,34 @@ function apply_font_color() {
     modify_font_color('paragraph', 'class');
     modify_font_color('fast-travel-coord', 'class');
 }
-function modify_font_color(target : string, hook_method='tag') {
+function modify_font_color(target: string, hook_method = 'tag') {
     for (let x of hook_method === 'class' ? document.getElementsByClassName(target) : document.getElementsByTagName(target)) { // Hook method specified like class so, op. by class else op. by tag
         (x as HTMLInputElement).style.color = font_color;
     }
 }
 function resources_selector() {
-    const rgb2hex = (rgb : string) => {
+    const rgb2hex = (rgb: string) => {
         if (rgb.search("rgb") === -1) return rgb; // Param doesnt seems like rgb formatted str so return without processed
         let realRGB = rgb.match(/^rgb?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+))?\)$/);
 
-        if(realRGB == null) return '';
+        if (realRGB == null) return '';
 
-        const hex = (x : string) => parseInt(x).toString(16).slice(-2); // Parse x from 10 base to 16 base  
+        const hex = (x: string) => parseInt(x).toString(16).slice(-2); // Parse x from 10 base to 16 base  
         return "#" + hex(realRGB[1]) + hex(realRGB[2]) + hex(realRGB[3]); // Return formated rgb output
-      };
+    };
 
-      let items = document.getElementsByClassName("container");
-      for(let element of items){
-        if(element.classList.contains('paragraph')){
-            if(element.innerHTML.includes("Pour les quêtes de ce succès prévoyez")){
-                let puces = element.getElementsByTagName('li');
 
-                for(let p of puces){
-                    p.addEventListener('click', function() {
-                        if(this.style.color != '' && rgb2hex(this.style.color) != '') {
-                            if(rgb2hex(this.style.color).toUpperCase() === resources_selected_color.toLocaleUpperCase()){
+    let items = document.getElementsByTagName("table");
+    for (let element of items) {
+        let para = element.getElementsByClassName("paragraph")
+        for (let paragraph of para) {
+            if (paragraph.innerHTML.includes("Pour les quêtes de ce succès prévoyez")) {
+                let list = paragraph.getElementsByTagName("li");
+
+                for (let puce of list) {
+                    puce.addEventListener('click', function () {
+                        if (this.style.color != '' && rgb2hex(this.style.color) != '') {
+                            if (rgb2hex(this.style.color).toUpperCase() === resources_selected_color.toLocaleUpperCase()) {
                                 this.style.color = font_color != '' ? font_color : '#626262';
                             }
                         } else {
@@ -49,7 +51,9 @@ function resources_selector() {
                 }
             }
         }
-      }
+    }
+
+
 
     // for (let x of document.getElementsByTagName('table')[1].getElementsByTagName('li')) {
     //     x.addEventListener('click', function() {
@@ -65,16 +69,16 @@ function resources_selector() {
 }
 
 
-(function() {
-    if(document.URL.includes("https://www.dofuspourlesnoobs.com/")) //We're on DPLN
-    {   
-        if(theme_color != '') {
+(function () {
+    if (document.URL.includes("https://www.dofuspourlesnoobs.com/")) //We're on DPLN
+    {
+        if (theme_color != '') {
             apply_theme();
         }
-        if(font_color != '') {
+        if (font_color != '') {
             apply_font_color();
         }
-        if(resources_selector_enabled) {
+        if (resources_selector_enabled) {
             resources_selector();
         }
     }
