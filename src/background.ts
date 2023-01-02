@@ -1,5 +1,4 @@
 
-
 let active = false;
 
 function makeOrange(color: string): void {
@@ -15,3 +14,4 @@ chrome.action.onClicked.addListener((tab) => {
         args: [color]
     }).then();
 });
+

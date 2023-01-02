@@ -7,6 +7,7 @@ let font_balises = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'ul']; //Do no
 function apply_theme() {
     document.getElementsByTagName('table')[1].style.backgroundColor = theme_color;
 }
+
 function apply_font_color() {
     font_balises.forEach(x => {
         modify_font_color(x);
@@ -68,17 +69,16 @@ function resources_selector() {
     // }
 }
 
-
-(function () {
-    if (document.URL.includes("https://www.dofuspourlesnoobs.com/")) //We're on DPLN
-    {
-        if (theme_color != '') {
+(function() {
+    if(document.URL.includes("https://www.dofuspourlesnoobs.com/")) //We're on DPLN
+    {   
+        if(theme_color != '') {
             apply_theme();
         }
-        if (font_color != '') {
+        if(font_color != '') {
             apply_font_color();
         }
-        if (resources_selector_enabled) {
+        if(resources_selector_enabled) {
             resources_selector();
         }
     }
