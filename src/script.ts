@@ -39,17 +39,17 @@ function resources_selector() {
         let para = table.getElementsByClassName("paragraph")
         for (let paragraph of para) {
 
-            
+
             let paragraph_children = paragraph.children;
             let list;
-            for(let i = 0; i < paragraph_children.length; i++){
-                if(paragraph_children[i].innerHTML.includes('À prévoir :') || paragraph_children[i].innerHTML.includes("Pour les quêtes de ce succès prévoyez")){
+            for (let i = 0; i < paragraph_children.length; i++) {
+                if (paragraph_children[i].innerHTML.includes('À prévoir :') || paragraph_children[i].innerHTML.includes("Pour les quêtes de ce succès prévoyez")) {
                     list = paragraph_children[i + 1];
                     break;
                 }
             }
 
-            if(list != undefined){
+            if (list != undefined) {
                 for (let puce of list.getElementsByTagName('li')) {
                     puce.addEventListener('click', function (e) {
                         e.preventDefault();
@@ -63,21 +63,21 @@ function resources_selector() {
                         }
                     });
                 }
+            }
         }
     }
 }
-
 window.addEventListener('load', (event) => {
     event.preventDefault();
-    if(document.URL.includes("https://www.dofuspourlesnoobs.com/")) //We're on DPLN
-    {   
-        if(theme_color != '') {
+    if (document.URL.includes("https://www.dofuspourlesnoobs.com/")) //We're on DPLN
+    {
+        if (theme_color != '') {
             apply_theme();
         }
-        if(font_color != '') {
+        if (font_color != '') {
             apply_font_color();
         }
-        if(resources_selector_enabled) {
+        if (resources_selector_enabled) {
             resources_selector();
         }
     }
