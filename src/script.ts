@@ -32,15 +32,28 @@ function resources_selector() {
     };
 
 
-    let items = document.getElementsByTagName("table");
-    for (let element of items) {
-        let para = element.getElementsByClassName("paragraph")
-        for (let paragraph of para) {
-            if (paragraph.innerHTML.includes("Pour les quêtes de ce succès prévoyez")) {
-                let list = paragraph.getElementsByTagName("li");
+    let tables = document.getElementsByTagName("table");
 
-                for (let puce of list) {
-                    puce.addEventListener('click', function () {
+    for (let table of tables) {
+
+        let para = table.getElementsByClassName("paragraph")
+        for (let paragraph of para) {
+
+            
+            let paragraph_children = paragraph.children;
+            let list;
+            for(let i = 0; i < paragraph_children.length; i++){
+                if(paragraph_children[i].innerHTML.includes('À prévoir :') || paragraph_children[i].innerHTML.includes("Pour les quêtes de ce succès prévoyez")){
+                    list = paragraph_children[i + 1];
+                    break;
+                }
+            }
+
+            if(list != undefined){
+                for (let puce of list.getElementsByTagName('li')) {
+                    puce.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        console.log(this.style.color)
                         if (this.style.color != '' && rgb2hex(this.style.color) != '') {
                             if (rgb2hex(this.style.color).toUpperCase() === resources_selected_color.toLocaleUpperCase()) {
                                 this.style.color = font_color != '' ? font_color : '#626262';
@@ -50,26 +63,12 @@ function resources_selector() {
                         }
                     });
                 }
-            }
         }
     }
-
-
-
-    // for (let x of document.getElementsByTagName('table')[1].getElementsByTagName('li')) {
-    //     x.addEventListener('click', function() {
-    //         if(this.style.color != '' && rgb2hex(this.style.color) != null) {
-    //             if(rgb2hex(this.style.color).toUpperCase() === resources_selected_color.toLocaleUpperCase()){
-    //                 this.style.color = font_color != '' ? font_color : '#626262';
-    //             }
-    //         } else {
-    //             this.style.color = resources_selected_color;
-    //         }
-    //     });
-    // }
 }
 
-(function() {
+window.addEventListener('load', (event) => {
+    event.preventDefault();
     if(document.URL.includes("https://www.dofuspourlesnoobs.com/")) //We're on DPLN
     {   
         if(theme_color != '') {
@@ -82,4 +81,4 @@ function resources_selector() {
             resources_selector();
         }
     }
-})();
+})
